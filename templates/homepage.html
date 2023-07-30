@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<! -- Utiliza-se isso para comentar um código html -- >
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HashZap</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.7.1/socket.io.js" integrity="sha512-Z6C1p1NIexPj5MsVUunW4pg7uMX6/TT3CUVldmjXx2kpip1eZcrAnxIusDxyFIikyM9A61zOVNgvLr/TGudOQg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js" integrity="sha512-3gJwYpMe3QewGELv8k/BX9vcqhryRdzRMxVfq6ngyWXwo03GFEzjsUm8Q7RZcHPHksttq7/GFoxjCVUjkjvPdw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+</head>
+<body>
+    <h1>HashZap</h1>
+
+    <div id="lista_mensagens"> <! -- aqui eu errei muito porque estava com : e não = para o id -- >
+    
+    </div>
+    
+    
+    <input type="text" id="usuario" placeholder="Usuário" required>
+    <input type="text" id="mensagem" placeholder="mensagem" required>
+    
+
+    
+    <button id="botao">Enviar</button>
+    
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        var socket = io("localhost:5000"); //alterar isso para apontar o servidor
+        socket.on("connect", function() {
+            console.log("usuário conectou");
+        });
+
+        socket.on("message", function(data) {
+            console.log("disparou uma mensagem");
+            $("#lista_mensagens").append($("<p>").text(data));
+        });
+
+//essa parte é para validar que o botao está funcionando pelo console F12
+        $("#botao").on("click", function() {
+            console.log("Clicou no botao");
+            socket.send($("#usuario").val() + ": " + $("#mensagem").val()); //objetivo da mensagem é: Liraa: Mensagem do lira, par isso tem que trazer os valores dos campos id usuario e mensagem
+                            //"Lira" + ": " + "Mensagem do lira"
+                        $("#mensagem").val(""); //o valor do campo depois do envio da mensagem depois do envio deve ficar vazio
+        });               
+
+    
+        // na parte superior desse código definimos com a função $(document).ready para que a o código js seja
+        // executado quando a págiuna terminar de carregar.
+        //isso é a forma de se comentar no código java script
+    })
+</script>
+
+</body>
+</html>
+
