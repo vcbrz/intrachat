@@ -15,7 +15,7 @@ fastjsonschema==2.18.0
 Flask==2.2.5
 Flask-SocketIO==5.3.5
 h11==0.14.0
-ipykernel==6.24.0
+ipykernel==6.16.2
 ipython==8.14.0
 itsdangerous==2.1.2
 jedi==0.18.2
